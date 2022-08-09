@@ -1,10 +1,13 @@
 package br.edu.impacta.authn.models;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity(name = "Users")
 public class User {
@@ -14,6 +17,8 @@ public class User {
     @Column(name="e_mail", unique = true)
     private String email;
     private String name;
+    @OneToMany(mappedBy = "user")
+    private List<UserRole> roles;
 
     public Long getId() {
         return id;
@@ -32,5 +37,11 @@ public class User {
     }
     public void setName(String name) {
         this.name = name;
+    }
+    public List<UserRole> getRoles() {
+        return roles;
+    }
+    public void setRoles(List<UserRole> roles) {
+        this.roles = roles;
     }
 }
